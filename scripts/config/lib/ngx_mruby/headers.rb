@@ -13,7 +13,7 @@ if config["headers"]
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
         # value must be a string
-        req.headers_out[key] = value.to_s
+        req.headers_out[key] = value.to_s unless req.headers_out['status'] == 404
       end
       break
     end
